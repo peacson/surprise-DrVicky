@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surprise 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #1a1a40, #0b0b1e);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .card {
+      z-index: 2;
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 40px rgba(255,255,255,0.1);
+      animation: pop 1.2s ease-out;
+    }
+
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .emoji {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    .burst {
+      position: absolute;
+      font-size: 30px;
+      animation: burst 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes burst {
+      0% { transform: scale(0.2); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>🎉 Joyeux anniversaire Dr Vicky 🎂</h1>
+  <p>
+    Une personne exceptionnelle mérite une journée exceptionnelle.
+    <br><br>
+    Que cette nouvelle année vous apporte réussite, santé et bonheur.
+    <br><br>
+    Merci pour votre guidance et votre inspiration ✨
+  </p>
+</div>
+
+<script>
+  // Emoji pluie
+  const emojis = ['🎉','🎂','🎊','✨','💫','🎁'];
+
+  function createEmoji() {
+    const el = document.createElement('div');
+    el.classList.add('emoji');
+    el.style.left = Math.random() * window.innerWidth + 'px';
+    el.style.animationDuration = (2 + Math.random() * 3) + 's';
+    el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 5000);
+  }
+
+  setInterval(createEmoji, 200);
+
+  // Explosion au chargement
+  function burst() {
+    for (let i = 0; i < 25; i++) {
+      const b = document.createElement('div');
+      b.classList.add('burst');
+      b.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      b.style.left = (window.innerWidth/2 + (Math.random()*200-100)) + 'px';
+      b.style.top = (window.innerHeight/2 + (Math.random()*200-100)) + 'px';
+      b.style.fontSize = (20 + Math.random()*20) + 'px';
+      document.body.appendChild(b);
+
+      setTimeout(() => b.remove(), 1000);
+    }
+  }
+
+  window.onload = burst;
+</script>
+
+</body>
+</html>
